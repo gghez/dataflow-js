@@ -52,9 +52,8 @@ var ActionBlock = require('dataflow-js').ActionBlock;
 
 var batchedAddToBasket = new BatchBlock(3);
 
-var addToBasket = new ActionBlock(function(product, price, quantity) {
-    console.log('Adding product', product);
-    // ...
+var addToBasket = new ActionBlock(function(products) {
+    // products == [ ['Shoes', 49, 2], ['Pants', 19, 3], ['Trousers', 29, 1] ]
 });
 
 batchedAddToBasket.linkTo(addToBasket);

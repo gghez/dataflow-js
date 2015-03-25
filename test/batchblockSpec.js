@@ -37,9 +37,8 @@ describe('BatchBlock unit test', function () {
         block.trigger();
 
         return block.completion.then(function () {
-            assert.isTrue(spy.calledTwice, 'linked block not called 2x.');
-            assert.isTrue(spy.calledWith(1), 'linked block not called with posted 1');
-            assert.isTrue(spy.calledWith(2), 'linked block not called with posted 2');
+            assert.isTrue(spy.calledOnce, 'linked block not called.');
+            assert.deepEqual(spy.args[0], [1, 2]);
         });
     });
 
@@ -54,10 +53,8 @@ describe('BatchBlock unit test', function () {
         block.post(3);
 
         return block.completion.then(function () {
-            assert.isTrue(spy.calledThrice, 'linked block not called 3x.');
-            assert.isTrue(spy.calledWith(1), 'linked block not called with posted 1');
-            assert.isTrue(spy.calledWith(2), 'linked block not called with posted 2');
-            assert.isTrue(spy.calledWith(3), 'linked block not called with posted 3');
+            assert.isTrue(spy.calledOnce, 'linked block not called.');
+            assert.deepEqual(spy.args[0], [1, 2, 3]);
         });
     });
 });

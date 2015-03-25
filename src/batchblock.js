@@ -30,10 +30,8 @@ function BatchBlock(size) {
 BatchBlock.prototype.trigger = function () {
     var _this = this;
 
-    this._buffer.forEach(function (args) {
-        _this._linkToBlocks.forEach(function (block) {
-            block.post.apply(block, args);
-        });
+    this._linkToBlocks.forEach(function (block) {
+        block.post.apply(block, _this._buffer);
     });
 
     this._buffer.length = 0;
@@ -43,7 +41,8 @@ BatchBlock.prototype.trigger = function () {
  * Posts a data element to this dataflow block.
  */
 BatchBlock.prototype.post = function () {
-    this._buffer.push(arguments);
+    var data = arguments.length == 1 ? arguments[0] : Array.prototype.slice.apply(arguments);
+    this._buffer.push(data);
 
     if (this._buffer.length >= this.size) {
         this.trigger();
