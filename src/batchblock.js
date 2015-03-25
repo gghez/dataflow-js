@@ -43,15 +43,11 @@ BatchBlock.prototype.trigger = function () {
  * Posts a data element to this dataflow block.
  */
 BatchBlock.prototype.post = function () {
-    var _this = this;
+    this._buffer.push(arguments);
 
-    Q.fapply(function () {
-        _this._buffer.push(arguments);
-
-        if (_this._buffer.length >= _this.size) {
-            _this.trigger();
-        }
-    }, arguments);
+    if (this._buffer.length >= this.size) {
+        this.trigger();
+    }
 };
 
 BatchBlock.prototype.linkTo = function (block) {

@@ -1,6 +1,7 @@
 {
   "name": "dataflow-js",
   "version": "0.0.1",
+  "repository": "http://github.com/gghez/dataflow-js.git",
   "dependencies": {
     "q": "^1.2.0"
   },
