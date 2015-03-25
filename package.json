@@ -1,7 +1,10 @@
 {
   "name": "dataflow-js",
+  "description": "DataFlow JS provides an actor-based programming model that supports in-process message passing for coarse-grained dataflow and pipelining tasks.",
   "version": "0.0.1",
-  "repository": "http://github.com/gghez/dataflow-js.git",
+  "repository": "https://github.com/gghez/dataflow-js.git",
+  "author": "Gregory Ghez",
+  "license": "MIT",
   "dependencies": {
     "q": "^1.2.0"
   },
@@ -12,5 +15,9 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha"
-  }
+  },
+  "main": "src/index.js",
+  "files": [
+    "src/**/*.js"
+  ]
 }
