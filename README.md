@@ -107,3 +107,40 @@ block.post(3);
 #### Properties
 
 - `completion` [q](https://github.com/kriskowal/q) promise for all running actions started by `post()` calls.
+
+### TransformManyBlock
+
+TransformManyBlock provides a dataflow block that invokes a provided transformation function for every data element received.
+Output linked blocks will receive on their input each element from output enumerable.
+
+```js
+var block = new TransformManyBlock(function (input) {
+    return [input, input * 2, input * 4, input * 8];
+});
+
+block.linkTo(new ActionBlock(function(input) {
+    console.log(input);
+}));
+
+block.post(5);
+block.post(1);
+block.post(3);
+
+// output:
+// 5
+// 10
+// 20
+// 40
+// 1
+// 2
+// ...
+```
+
+#### Methods
+
+- `post()` Posts a data element to this dataflow block.
+- `linkTo()` Link current block output to another block input.
+
+#### Properties
+
+- `completion` [q](https://github.com/kriskowal/q) promise for all running actions started by `post()` calls.

@@ -1,6 +1,6 @@
 var Q = require('q');
 
-function TransformBlock(action) {
+function TransformManyBlock(action) {
     var _this = this;
 
     this.action = action;
@@ -17,13 +17,15 @@ function TransformBlock(action) {
 /**
  * Posts a data element to this dataflow block.
  */
-TransformBlock.prototype.post = function () {
+TransformManyBlock.prototype.post = function () {
     var _this = this;
 
     var task = Q.fapply(this.action, arguments).then(function (output) {
         return Q.all(_this._linkToBlocks.map(function (block) {
-            block.post(output);
-            return block.completion;
+            return Q.all(output.map(function (outputItem) {
+                block.post(outputItem);
+                return block.completion;
+            }));
         }));
     });
 
@@ -39,9 +41,9 @@ TransformBlock.prototype.post = function () {
  *
  * @param block Target block.
  */
-TransformBlock.prototype.linkTo = function (block) {
+TransformManyBlock.prototype.linkTo = function (block) {
     this._linkToBlocks.push(block);
 };
 
 
-module.exports = TransformBlock;
+module.exports = TransformManyBlock;

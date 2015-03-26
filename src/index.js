@@ -1,5 +1,6 @@
 module.exports = {
     ActionBlock: require('./actionBlock'),
     BatchBlock: require('./batchBlock'),
-    TransformBlock: require('./transformBlock')
+    TransformBlock: require('./transformBlock'),
+    TransformManyBlock: require('./transformManyBlock')
 };
