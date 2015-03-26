@@ -6,3 +6,4 @@ Object.keys(dataflowJs).forEach(function (type) {
 
 global.assert = require('chai').assert;
 global.sinon = require('sinon');
+global.Q = require('q');

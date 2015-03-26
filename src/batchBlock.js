@@ -41,14 +41,19 @@ BatchBlock.prototype.trigger = function () {
  * Posts a data element to this dataflow block.
  */
 BatchBlock.prototype.post = function () {
-    var data = arguments.length == 1 ? arguments[0] : Array.prototype.slice.apply(arguments);
-    this._buffer.push(data);
+    var input = arguments.length == 1 ? arguments[0] : Array.prototype.slice.apply(arguments);
+    this._buffer.push(input);
 
     if (this._buffer.length >= this.size) {
         this.trigger();
     }
 };
 
+/**
+ * Links this block output to a target block input.
+ *
+ * @param block Target block.
+ */
 BatchBlock.prototype.linkTo = function (block) {
     this._linkToBlocks.push(block);
 };
