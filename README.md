@@ -70,6 +70,39 @@ batchedAddToBasket.post('Trousers', 29, 1);
 
 - `post()` Posts a data element to this dataflow block.
 - `trigger()` Transfer pending `post()` call to next blocks even if batch size is not reached.
+- `linkTo()` Link current block output to another block input.
+
+#### Properties
+
+- `completion` [q](https://github.com/kriskowal/q) promise for all running actions started by `post()` calls.
+
+### TransformBlock
+
+TransformBlock provides a dataflow block that invokes a provided transformation function for every data element received.
+
+```js
+var block = new TransformBlock(function (input) {
+    return input * 10;
+});
+
+block.linkTo(new ActionBlock(function(input) {
+    console.log(input);
+}));
+
+block.post(5);
+block.post(1);
+block.post(3);
+
+// Output:
+// 50
+// 10
+// 30
+```
+
+#### Methods
+
+- `post()` Posts a data element to this dataflow block.
+- `linkTo()` Link current block output to another block input.
 
 #### Properties
 
